@@ -17,6 +17,41 @@ document.addEventListener('DOMContentLoaded',function(){
         loginBox.style.display = "block"
         signupBox.style.display = "none"
     })
+    document.getElementById('login-btn').addEventListener('click',async (e)=>{
+        e.preventDefault()
+        const username = document.getElementById("login-username").value
+        const email = document.getElementById('login-email').value
+        const password = document.getElementById('login-password').value
+        const response = await fetch("http://localhost:3000/users/login",{
+            method:'POST',
+            headers:{ "Content-Type": "application/json" },
+            body: JSON.stringify({email,password}),
+        })
+        const data = await response.json()
+        if (data.success) {
+            alert("Login successful!");
+        } else {
+            alert("Invalid credentials!");
+        }
+
+    })
+    document.getElementById('signup-btn').addEventListener('click',async (e)=>{
+        e.preventDefault()
+        const username = document.getElementById("signup-username").value
+        const name = document.getElementById('name').value
+        const email = document.getElementById('signup-email').value
+        const password = document.getElementById('signup-password').value
+
+        const response = await fetch("http://localhost:3000/users/signup",{
+            method:'POST',
+            headers:{ "Content-Type": "application/json" },
+            body: JSON.stringify({ name, username, email, password }),
+        })
+        const data = await response.json();
+        alert(data.message)
+
+    })
+
 
 
 })
