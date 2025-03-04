@@ -29,20 +29,26 @@ exports.signup = async (req, res) => {
 exports.login = async (req, res) => {
     try {
         const { email, password } = req.body
+        console.log(email,password)
+        console.log("🔹 Received email in backend:", email)
 
         // Check if user exists
         const user = await User.findOne({ where: { email } })
+        console.log("🔹 User found in DB:", user)
         if (!user) {
             return res.status(400).json({ message: 'User not found' })
         }
 
         // Compare passwords
         const isMatch = await bcrypt.compare(password, user.password)
-        if (!isMatch) {
-            return res.status(401).json({ message: 'Invalid credentials' })
+        console.log("🔹 Password match result:", isMatch)
+        if (isMatch) {
+            console.log("🔹 Sending successful response");
+            return res.status(200).json({ message: 'Login successful!', user })
+        } else {
+            console.log("🔹 Password did not match");
+            return res.status(401).json({ message: 'Invalid credentials, password did not match' })
         }
-
-        res.status(200).json({ message: 'Login successful!', user })
     } catch (err) {
         console.error(err)
         res.status(500).json({ message: 'Server error' })

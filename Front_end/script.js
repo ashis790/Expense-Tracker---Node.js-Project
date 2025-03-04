@@ -19,17 +19,21 @@ document.addEventListener('DOMContentLoaded',function(){
     })
     document.getElementById('login-btn').addEventListener('click',async (e)=>{
         e.preventDefault()
-        const username = document.getElementById("login-username").value
+        //const username = document.getElementById("login-username").value
         const email = document.getElementById('login-email').value
         const password = document.getElementById('login-password').value
+        console.log(email,password)
         const response = await fetch("http://localhost:3000/users/login",{
             method:'POST',
             headers:{ "Content-Type": "application/json" },
             body: JSON.stringify({email,password}),
         })
         const data = await response.json()
-        if (data.success) {
+        console.log(data)
+        if (data.message === 'Login successful!') {
             alert("Login successful!");
+            window.location.href = 'expense_tracker.html'
+
         } else {
             alert("Invalid credentials!");
         }

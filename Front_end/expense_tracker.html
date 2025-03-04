@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Expence tracker app</h1>
+    <form action="" id="Expence_form">
+        <label for="amount">amount</label>
+        <input type="number" id="amount" required>
+        
+        <label for="discription" >Discription</label>
+        <textarea id="description" rows="4" cols="30" required></textarea>
+
+        <label for="category">Category:</label>
+        <select name="" id="category">
+            <option value="Food">Food</option>
+            <option value="Rent">rent</option>
+            <option value="Transport">Transport</option>
+            <option value="Shopping">Shopping</option>
+            <option value="Other">Other</option>
+        </select>
+        <button type="submit">Add Expence</button>
+        
+    </form>
+    <h2>Your expence</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Amount</th>
+                <th>Description</th>
+                <th>Category</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="expense-list">
+            <!-- Expenses will be displayed here -->
+        </tbody>
+    </table>
+</body>
+</html>
