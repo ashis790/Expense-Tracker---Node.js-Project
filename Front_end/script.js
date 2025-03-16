@@ -32,8 +32,8 @@ document.addEventListener('DOMContentLoaded',function(){
         console.log(data)
         if (data.message === 'Login successful!') {
             alert("Login successful!");
-            window.location.href = 'expense_tracker.html'
-
+                localStorage.setItem('token', data.token); // Store token
+                window.location.href = 'expense_tracker.html'
         } else {
             alert("Invalid credentials!");
         }

@@ -1,5 +1,6 @@
 const User = require('../models/User')
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 exports.signup = async (req, res) => {
     try {
@@ -44,7 +45,8 @@ exports.login = async (req, res) => {
         console.log("🔹 Password match result:", isMatch)
         if (isMatch) {
             console.log("🔹 Sending successful response");
-            return res.status(200).json({ message: 'Login successful!', user })
+            const token = jwt.sign({email: user.email},'@ambika')
+            res.status(200).json({ message: 'Login successful!', token })
         } else {
             console.log("🔹 Password did not match");
             return res.status(401).json({ message: 'Invalid credentials, password did not match' })
